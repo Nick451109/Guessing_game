@@ -40,7 +40,6 @@
 	
 fin:
 	#Verificar si ya pase los 3 intentos
-	beq $t0,$t1,exitWin #Si son iguales gana
 	beq $t3,3,exitLose #lo intenta 3 veces
 	addi $t3,$t3,1 #Aumentar los intentos
 	
@@ -56,6 +55,7 @@ fin:
 	
 	sub $t2,$t0,$t1 #resta (ya la explico)
 if1:
+	beq $t0,$t1,exitWin #Si son iguales gana
 	sle $t4,$t2,20 # si Diferencia<=20
 	sge $t5,$t2,-20 #Si diferencia >=-20
 	and $t4,$t4,$t5 #Si entre en el rango
