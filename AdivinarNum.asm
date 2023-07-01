@@ -36,7 +36,11 @@
 	la $a0, mensaje1
 	syscall 
 	
-	fin:
+fin:
+	#Verificar si ya pase los 3 intentos
+	beq $t3,10,exitLose #Nose porque pero lo intenta 4 veces cuando pones 3
+	addi $t3,$t3,1 #Aumentar los intentos
+	beq $t0,$t1,exitWin #Si son iguales gana
 	#Impresion de Insertar digito
 	li	$v0, 4
 	la	$a0, mensaje2
@@ -47,35 +51,22 @@
 	syscall 
 	move $t0,$v0 #se guardo el primer numero en $t0
 	
-	#Verificar si ya pase los 3 intentos
-	beq $t3,2,exitLose #Nose porque pero lo intenta 4 veces cuando pones 3
-	addi $t3,$t3,1 #Aumentar los intentos
-	beq $t0,$t1,exitWin #Si son iguales gana
-
-    	# elif numero_ingresado - 20 <= numero_objetivo <= numero_ingresado - 10
-    	#ble <= yyyyyy  bge >=
-   	sub $t2, $t0, 20
-    	ble $t2, $t1, frio_frio
-    	sub $t2, $t0, 10
-    	ble $t2, $t1, frio_frio
-
-    	# elif numero_ingresado - 9 <= numero_objetivo <= numero_ingresado - 1
-    	sub $t2, $t0, 9
-    	ble $t2, $t1, frio
-    	sub $t2, $t0, 1
-    	ble $t2, $t1, frio
-
-    	# elif numero_ingresado + 10 <= numero_objetivo <= numero_ingresado + 20
-    	addi $t2, $t0, 10
-    	ble $t2, $t1, caliente
-    	addi $t2, $t0, 20
-    	ble $t2, $t1, caliente
-
-    	# elif numero_ingresado + 1 <= numero_objetivo <= numero_ingresado + 9
-    	addi $t2, $t0, 1
-    	ble $t2, $t1, caliente_caliente
-    	addi $t2, $t0, 9
-    	ble $t2, $t1, caliente_caliente
+	sub $t2,$t0,$t1 #resta (ya la explico)
+if1:
+	sle $t4,$t2,20 # si Diferencia<=20
+	sge $t5,$t2,-20 #Si diferencia >=-20
+	and $t4,$t4,$t5 #Si entre en el rango
+	beqz $t4,fin #si no entra en el rango salado 
+	sge $t4,$t2,10 #Si Diferencia>=10
+	beq $t4,1,frio_frio #lo tiro a frio frio
+	sle $t4,$t2,-10 #-20 y -10
+	beq $t4,1,caliente
+	sge $t4,$t2,0 # -1 y -9
+	beq $t4,1,frio 
+	sle $t4,$t2,0 #1 y 9
+	beq $t4,1,caliente_caliente 
+	 
+	
 
     	# else (mensaje por defecto)
     	li $v0, 4
