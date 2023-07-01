@@ -7,7 +7,7 @@
 #Validacion sigue intentando
 .data
 	mensaje1: .asciiz "-----------Bienvenido al juego de adivinar el número-----------\n Tienes 3 intentos para adivinar un numero entre 1 y 200\n"
-	mensaje2: .asciiz "Ingrese un numero entre (1-200)\n:"
+	mensaje2: .asciiz "Ingrese un numero entre (1-200): "
 	texto_felicitaciones: .asciiz "Felicitaciones! Adivinaste el numero en "
 	txtfel2: .asciiz " intentos\n"
 	texto_frio_frio:   .asciiz "Frio frio.\n"
@@ -40,7 +40,7 @@
 	
 fin:
 	#Verificar si ya pase los 3 intentos
-	beq $t3,10,exitLose #lo intenta 3 veces
+	beq $t3,3,exitLose #lo intenta 3 veces
 	addi $t3,$t3,1 #Aumentar los intentos
 	beq $t0,$t1,exitWin #Si son iguales gana
 	#Impresion de Insertar digito
@@ -67,6 +67,8 @@ if1:
 	beq $t4,1,frio 
 	sle $t4,$t2,0 #1 y 9
 	beq $t4,1,caliente_caliente 
+	
+	
 	 
     	# else (mensaje por defecto)
     	li $v0, 4
@@ -77,33 +79,25 @@ frio_frio:
 	li	$v0, 4
 	la	$a0, texto_frio_frio
 	syscall
-	li	$v0, 4
-	la	$a0, sigue_intentando
-	syscall
+
 	j fin
 frio:
 	li	$v0, 4
 	la	$a0, texto_frio
 	syscall
-	li	$v0, 4
-	la	$a0, sigue_intentando
-	syscall
+
 	j fin
 caliente:
 	li	$v0, 4
 	la	$a0, texto_caliente
 	syscall
-	li	$v0, 4
-	la	$a0, sigue_intentando
-	syscall
+
 	j fin
 caliente_caliente:
 	li	$v0, 4
 	la	$a0, texto_caliente_caliente
 	syscall
-	li	$v0, 4
-	la	$a0, sigue_intentando
-	syscall
+
 	j fin
 ninguno:
 	li	$v0, 4
