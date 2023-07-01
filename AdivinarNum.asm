@@ -40,9 +40,10 @@
 	
 fin:
 	#Verificar si ya pase los 3 intentos
+	beq $t0,$t1,exitWin #Si son iguales gana
 	beq $t3,3,exitLose #lo intenta 3 veces
 	addi $t3,$t3,1 #Aumentar los intentos
-	beq $t0,$t1,exitWin #Si son iguales gana
+	
 	#Impresion de Insertar digito
 	li	$v0, 4
 	la	$a0, mensaje2
@@ -115,7 +116,7 @@ exitWin:
 	la $a0, texto_felicitaciones
 	syscall 
 	
-	subi $t3,$t3,1 #resto 1 al numero de intentos
+	#subi $t3,$t3,1 #resto 1 al numero de intentos
 	
 	li $v0, 1
 	move $a0, $t3
