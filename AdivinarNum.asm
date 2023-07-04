@@ -23,12 +23,11 @@
 .text
 	main:
 	#Generar Numero random del 1,200(Demore 3h en esto)
-	#li $v0, 42  # 42 el systemcall para generar el numero random
-	#li $a1, 200 # $a1 donde esta el tope
-	#syscall     # El numero random estara en $a0
-	#add $a0, $a0, 1  #Se le suma uno para que sea el mas bajo
-	#move $t1,$a0 #Guardo el numero en t1 para que no se pierda
-	li $t1, 50
+	li $v0, 42  # 42 el systemcall para generar el numero random
+	li $a1, 200 # $a1 donde esta el tope
+	syscall     # El numero random estara en $a0
+	add $a0, $a0, 1  #Se le suma uno para que sea el mas bajo
+	move $t1,$a0 #Guardo el numero en t1 para que no se pierda
 	
 	#Contador
 	li $t3, 0 #guardamos la variable 0 en t3
