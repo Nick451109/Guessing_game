@@ -1,6 +1,6 @@
 #ProyectoP1 Organizacion de Computadores Irving Macias Nick Arevalo
 #Pedirle a usuario un numero
-#validacionFRio frio como el agua del rio
+#validacion Frio frio
 #validacion Frio 
 #Validacion Caliente
 #Validacion Caliente caliente
@@ -22,7 +22,7 @@
     	
 .text
 	main:
-	#Generar Numero random del 1,200(Demore 3h en esto)
+	#Generar Numero random del 1,200
 	li $v0, 42  # 42 el systemcall para generar el numero random
 	li $a1, 200 # $a1 donde esta el tope
 	syscall     # El numero random estara en $a0
@@ -52,7 +52,7 @@ fin:
 	syscall 
 	move $t0,$v0 #se guardo el primer numero en $t0
 	
-	sub $t2,$t0,$t1 #resta (ya la explico)
+	sub $t2,$t0,$t1 #resta el numero del usuario - el numero ganador 
 if1:
 	beq $t0,$t1,exitWin #Si son iguales gana
 	sle $t4,$t2,20 # si Diferencia<=20
