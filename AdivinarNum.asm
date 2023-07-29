@@ -108,7 +108,7 @@ exitLose:
 	li $v0, 4
 	la $a0, noAdivinaste
 	syscall 
-	li $v0, 10
+	li $v0, 10 #termina la ejecucion 
     	syscall
 exitWin:
 	li $v0, 4
